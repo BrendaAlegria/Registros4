@@ -1,0 +1,48 @@
+body{
+    background-color:#B7D5E0  ;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh; /* Ajusta la altura según tus necesidades */
+  }
+  /*bOTONES INICIO,PRECIOS */
+.menu {
+	/*Este centra los recuadritos rectangulares bueno a la altura */
+	margin: 15px auto 0;
+	position: relative;
+	/*Esta es para los cuadritos de Inicio registrar etc */
+	width: auto;
+	/*Altura De Los Cuadritos*/
+	height: 40px;
+	text-transform: uppercase;
+	background-image:#565273;  
+	background-blend-mode: normal, lighten, soft-light;
+	/*Circula los Regtangulitos*/
+	border-radius: 50px;
+    border-color: #565273;
+	/*Tamaño de letra de los Regtangulitos*/
+	font-size: 2px;
+	text-align: center;
+
+  }
+.menu a {
+	/*Centra la letra de los Regtangulitos*/
+	line-height: 50px;
+	/*--*/
+	height: 150%;
+	/*Tamaño de letra de´los cuadrtos*/
+	font-size: 35px;
+	display: inline-block;
+	position: relative;
+	font-family: fuenteTitulo5;
+	/*--*/
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: #565273;
+	cursor: pointer;
+  }
+  
