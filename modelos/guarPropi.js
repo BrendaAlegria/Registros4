@@ -1,13 +1,13 @@
 var Sequelize=require("sequelize");
 
 module.exports=(conexion)=>{
-    const UsuarioSchema=conexion.define("usuario",{
+    const PropietarioSchema=conexion.define("propietario",{
         id:{
             type:Sequelize.INTEGER,
             primaryKey:true,
             autoIncrement:true
         },
-        nomUsu:{
+        nomPro:{
             type:Sequelize.STRING
 
         },
@@ -21,6 +21,6 @@ module.exports=(conexion)=>{
             type:Sequelize.STRING
         }
     });
-    return UsuarioSchema;
+    return PropietarioSchema;
 
 };

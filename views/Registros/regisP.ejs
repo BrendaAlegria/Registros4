@@ -1,0 +1,19 @@
+<%- include("../templates/encabezado2")%>
+<form action="/guardarP" method="post">
+    <h2>Registrarte como Propietario </h2>
+    <input required type="text" name="nom" id="nomPro" placeholder="Nombre Usuario">
+    <input required type="email" name="email" id="email" placeholder="Correo Electronico">
+    <input required type="password" name="password" id="password" placeholder="Contraseña">
+    <input required type="text" name="tel" id="tel" placeholder="Telefono">
+    <button > Registrar</button>
+    <br>
+    <input type="reset" value="Borrar">
+    <br>
+    <a href="/principal">Cancelar </a>
+</form>
+<div class="navbar">
+    <nav class="menu">
+        <h2><FONT FACE="courier new"><a href="/loging"> R e g r e s a r</a></FONT></h2>
+    </nav>
+</div>
+<%- include("../templates/pie")%>
