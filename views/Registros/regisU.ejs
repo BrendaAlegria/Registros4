@@ -1,19 +1,17 @@
 <%- include("../templates/encabezado2")%>
 <form action="/guardarU" method="post">
     <h2>Registrarte como Usuario </h2>
-    <input required type="text" name="nom" id="nomUsu" placeholder="Nombre Usuario">
-    <input required type="email" name="email" id="email" placeholder="Correo Electronico">
+    <input required type="text" name="nomU" id="nomU" placeholder="Nombre" autofocus>
+    <input required type="text" name="nomUsu" id="nomUsu" placeholder="Nombre Usuario" autofocus>
+    <input required type="email" name="email" id="email" placeholder="Correo Electronico" autofocus>
     <input required type="password" name="password" id="password" placeholder="Contraseña">
-    <input required type="text" name="tel" id="tel" placeholder="Telefono">
-    <button > Registrar</button>
+    <input required type="text" name="tel" id="tel" placeholder="Telefono" autofocus>
+    
+    <button >Guardar Registro</button>
     <br>
     <input type="reset" value="Borrar">
     <br>
-    <a href="/principal">Cancelar </a>
+    <br>
+    ..............<a href="/principal">Cancelar </a>...............<a href="/loging">Regresar</a>...................
 </form>
-<div class="navbar">
-    <nav class="menu">
-        <h2><FONT FACE="courier new"><a href="/loging"> R e g r e s a r</a></FONT></h2>
-    </nav>
-</div>
 <%- include("../templates/pie")%>

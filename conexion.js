@@ -26,7 +26,7 @@ var Propietario=propietarioModelo(conexion);
 //sale de la aplicacion y se conecta a otro programa
 conexion.sync({force:false})
 .then(()=>{
-    console.log("Conectado a MYSQL con planetScale");
+    console.log("Conectado a MYSQL con planetScale Felicidades!!");
 })
 .catch((err)=>{
     console.log("Error al conectarse con MYSQL de PlanetScale"+err);

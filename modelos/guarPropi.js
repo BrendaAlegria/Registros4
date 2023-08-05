@@ -7,6 +7,10 @@ module.exports=(conexion)=>{
             primaryKey:true,
             autoIncrement:true
         },
+        nomP:{
+            type:Sequelize.STRING
+
+        },
         nomPro:{
             type:Sequelize.STRING
 
