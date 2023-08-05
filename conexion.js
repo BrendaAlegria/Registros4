@@ -29,7 +29,7 @@ conexion.sync({force:false})
     console.log("Conectado a MYSQL con planetScale Felicidades!!");
 })
 .catch((err)=>{
-    console.log("Error al conectarse con MYSQL de PlanetScale"+err);
+    console.log("Error al conectarse con MYSQL de PlanetScale:"+err);
     // console.log("Intentar una conexcion local");
     // db=process.env.DB_LOCAL;
     // var conexion=new Sequelize(db,usuario,password,{
