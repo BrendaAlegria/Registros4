@@ -19,10 +19,10 @@ module.exports=(conexion)=>{
             type:Sequelize.STRING
         },
         password:{
-            type:Sequelize.STRING
+            type:Sequelize.STRING(10)
         },
         tel:{
-            type:Sequelize.STRING
+            type:Sequelize.STRING(10)
         }
     });
     return UsuarioSchema;

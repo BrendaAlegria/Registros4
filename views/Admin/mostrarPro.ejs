@@ -1,0 +1,51 @@
+<%- include("../templates/encabezado2")%>
+<%- include("../templates/menuCerrar")%>
+<br>
+<center><h1>Mostrar Propietarios</h1></center>
+<center>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Password</th>
+                <th>Telefono</th>
+                <th>Editar / Borrado físico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+            Propietarios.forEach((propietario)=>{
+            %>
+            <tr>
+                <td><%= propietario.id %></td>
+                <td><%= propietario.nomU %></td>
+                <td><%= propietario.nomUsu %></td>
+                <td><%= propietario.email %></td>
+                <td><%= propietario.password %></td>
+                <td><%= propietario.tel %></td>
+                <td>
+                    <a href="/editarPro/<%= propietario.id %>">Editar</a> / <a href="/borradoFisicoP/<%= propietario.id %>">Borrado físico</a>
+                </td>
+            </tr>
+            <%
+            });
+            %>
+            
+        </tbody>
+    </table>
+
+</center>
+<nav class="menu">
+    <h2><FONT FACE="courier new"><a href="mostrar"> Regresar</a></FONT></h2>
+  </nav>
+</div>
+<br>
+<br>
+<br>
+
+
+
+<%- include("../templates/pie")%>

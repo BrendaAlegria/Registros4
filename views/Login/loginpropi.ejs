@@ -1,10 +1,10 @@
 <%- include("../templates/encabezado2")%>
 
-<form action="/validar" method="post" id="formulario">
-    <h2>Iniciar Sesion Propietario</h2>
-    <input required type="text" name="propi" placeholder="Usuario">
-    <input required type="password" name="password" placeholder="Contraseña">
-    <button > Ingresar</button>
+<form action="/validarP" method="post" id="formulario">
+    <h2>Iniciar Sesion Propietario </h2>
+    <input required type="text" name="nomPro" id="nomPro" placeholder="Nombre Usuario" autofocus>
+    <input required type="password" name="password" id="password" placeholder="Contraseña">
+    <button type="submit" >Ingresar</button>
     <br>
     <input type="reset" value="Borrar">
     <br>

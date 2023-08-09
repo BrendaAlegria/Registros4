@@ -15,9 +15,9 @@
 	padding: 60px 0;
  }
 /*Imagen del centro y color*/
-.header#Inicio{
+.header#Usu{
  	height: 100vh;
- 	background-image:url(../css/general.jpg); 
+ 	background-image:url(../css/usuario.jpg); 
  	background-repeat: no-repeat;
  	background-size: cover;
  	background-attachment: fixed;
@@ -458,9 +458,6 @@ footer {
 	
 	}
 	
-	
-
-
  	.Agregar-imagen {
  		width: 95%;
  	}

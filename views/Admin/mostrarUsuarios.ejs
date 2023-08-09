@@ -1,0 +1,51 @@
+<%- include("../templates/encabezado2")%>
+<%- include("../templates/menuCerrar")%>
+<br>
+<center><h1>Mostrar Usuarios</h1></center>
+<center>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Password</th>
+                <th>Telefono</th>
+                <th>Editar / Borrado físico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+            Usuarios.forEach((usuario)=>{
+            %>
+            <tr>
+                <td><%= usuario.id %></td>
+                <td><%= usuario.nomU %></td>
+                <td><%= usuario.nomUsu %></td>
+                <td><%= usuario.email %></td>
+                <td><%= usuario.password %></td>
+                <td><%= usuario.tel %></td>
+                <td>
+                    <a href="/editarUsuario/<%= usuario.id %>">Editar</a> / <a href="/borradoFisico/<%= usuario.id %>">Borrado físico</a>
+                </td>
+            </tr>
+            <%
+            });
+            %>
+            
+        </tbody>
+    </table>
+
+</center>
+<nav class="menu">
+    <h2><FONT FACE="courier new"><a href="mostrar"> Regresar</a></FONT></h2>
+  </nav>
+</div>
+<br>
+<br>
+<br>
+
+
+
+<%- include("../templates/pie")%>

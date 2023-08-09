@@ -3,115 +3,191 @@ var ruta=require("express").Router();
 var {Usuario} = require("../conexion");
 var {Propietario} = require("../conexion");
 
+
+//RUTAS ADMIN
+    //CONTRASEÑA DEL ADMIN
+ruta.post("/validarA",(req,res)=>{
+    if(req.body.admin=="HARRY" && req.body.password=="28"){
+        req.session.admin=req.body.admin;
+        //renderisa bienvenido
+        res.redirect("/mostrar");
+    }
+    else{
+        res.redirect("/error");
+    }
+});
+  //Ruta mostrar 
+ruta.get("/mostrar",(req,res)=>{
+    res.render("Admin/mostrar");
+});
+    //Ruta si no te deja entrar a mostrar usuarios
+/*ruta.get("/mostrarUsuarios",(req,res)=>{
+    res.render("error");
+});*/
+  //Ruta mostrar Propietarios
+// ruta.get("/mostrarPro",(req,res)=>{
+//     res.render("Admin/mostrarPro");
+// });
+    //Ruta si no te deja entrar a mostrar Propietarios
+// ruta.get("/mostrarPro",(req,res)=>{
+//     res.render("error");
+// });
+
+
+
+//MOSTRAR 
+    //Mostrar Usuarios
+ruta.get("/mostrarUsuarios",(req,res)=>{
+    //console.log("entra a mostrarUsuarios..................................")
+    Usuario.findAll()
+    .then((s)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Admin/mostrarUsuarios",{Usuarios:s});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+    //Mostrar Proietarios
+ruta.get("/mostrarPro",(req,res)=>{
+    //console.log("entra a mostrarPropietarios..................................")
+    Propietario.findAll()
+    .then((p)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Admin/mostrarPro",{Propietarios:p});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+//BORRAR 
+ruta.get("/borradoFisico/:id",(req,res)=>{//lo borra completamnete
+    Usuario.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/mostrarUsuarios");
+    })
+    .catch((err)=>{
+        console.log("Error .............. "+err);
+        res.redirect("error");
+    });
+});
+ruta.get("/borradoFisicoP/:id",(req,res)=>{//lo borra completamnete
+    Propietario.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/mostrarPro");
+    })
+    .catch((err)=>{
+        console.log("Error .............. "+err);
+        res.redirect("error");
+    });
+});
+//EDITAR
+ruta.get("/editarUsuario/:id",(req, res)=>{
+    Usuario.findByPk(req.params.id)
+    .then((U)=>{
+        res.render("Admin/modificarUsuario",{usua:U});
+    })
+    .catch((err)=>{
+        console.log("Error ........... "+err);
+        res.redirect("error");
+    });
+});
+
+//MODIFICAR USUARIO 
+ruta.post("/modificarUsuarioo",(req,res)=>{
+    Usuario.update(req.body,{where:{id:req.body.id}})
+    .then(()=>{
+        res.redirect("/mostrarUsuarios");
+    })
+    .catch((err)=>{
+        console.log("Error ................. "+err);
+        res.redirect("error");
+    });
+});
+
+//CERRAR SESION 
+  //Usuario
+ruta.get("/logoutU",(req,res)=>{
+    req.session=null;
+    res.redirect("/principal")
+});
+ruta.get("/logoutP",(req,res)=>{
+    req.session=null;
+    res.redirect("/principal")
+});
+ruta.get("/logoutA",(req,res)=>{
+    req.session=null;
+    res.redirect("/principal")
+});
+
 //RUTAS DE LOGIN 
-// ruta.post("/validar",(req,res)=>{
-//     console.log(req.body);
-//     Usuario.findAll({where:{nomUsu:req.body.nomUsu,password:req.body.password}})
-//     .then((nomUsu)=>{
-//         if(nomUsu!=""){
-//             req.session.nomUsu=nomUsu[0].nomUsu;
-//             res.redirect("/principalU");
-//         }
-//         else{
-//             res.redirect("/loging");
-//         }
-        
-//     })
-//     .catch((err)=>{
-//         console.log("Error en login ........ "+err);
-//         res.redirect("/");
-//     });
-// });
+//RUTAS DE LOGIN Usuario
+ruta.post("/validarU", (req, res) => {
+     Usuario.findAll({ where: {nomUsu:req.body.nomUsu, password:req.body.password } })
+         .then((u) => {
+             if (u != "") {
+                 req.session.nomU = u[0].nomU;
+                 console.log("then if");
+                 res.redirect("/principalU" );
+             } else {
+                console.log("then else");
+                 res.redirect("/loginusuario");
+             }
+         })
+         .catch((err) => {
+             console.log("Error en login ........: " + err);
+             res.redirect("/errorloU");
+         });
+});
+//Ruta De Validacion Login USUARIO 
+ruta.get("/principalU",(req,res)=>{
+    if(req.session.nomU){
+        res.render("principalU");
+    }
+    else{
+        res.redirect("/error");
+    }
+});
+//RUTAS DE LOGIN Propietario 
+ruta.post("/validarP", (req, res) => {
+    Propietario.findAll({ where: {nomPro:req.body.nomPro, password:req.body.password } })
+        .then((p) => {
+            if (p != "") {
+                req.session.nomP = p[0].nomP;
+                console.log("then if");
+                res.redirect("/principalP");
+            } else {
+               console.log("then else");
+                res.redirect("/loginusuario");
+            }
+        })
+        .catch((err) => {
+            console.log("Error en login ........: " + err);
+            res.redirect("/errorloP");
+        });
+});
+//Ruta De Validacion Login PROPIETARIO
+ruta.get("/principalP",(req,res)=>{
+    if(req.session.nomP){
+        res.render("principalP");
+    }
+    else{
+        res.redirect("/error");
+    }
+});
 
-// ruta.get("/bienvenido",(req,res)=>{
-//     console.log(req.session.usuario);
-//     if(req.session.usuario==undefined || req.session.usuario=="" || req.session.usuario==null){
-//         res.redirect("login");
-//     }
-//     else{
-//         res.render("bienvenido",{usuario:req.session.usuario});
-//     }
-// });
 
-// ruta.get("/logout",(req,res)=>{
-//     req.session=null;
-//     res.redirect("/")
-// });
 
-// ruta.get("/",(req,res)=>{
-//     Usuario.findAll({where:{status:1}})
-//     .then((usu)=>{
-//         //console.log(usu);
-//         res.render("mostrarUsuario",{Usuarios:usu});
-//     })
-//     .catch((err)=>{
-//         console.log("Error .................."+err)
-//         res.render("mostrarUsuario");
-//     });
-// });
-
-// ruta.get("/nuevoUsuario",(req, res)=>{
-//     res.render("nuevoUsuario");
-// });
-
-// ruta.post("/nuevoUsuario",(req,res)=>{
-//     console.log(req.body);
-//     Usuario.create(req.body)
-//     .then(()=>{
-//         res.redirect("/")
-//     })
-//     .catch((err)=>{
-//         console.log("error "+err);
-//         res.redirect("/");
-//     });
-// });
-
-// ruta.get("/editarUsuario/:id",(req, res)=>{
-//     Usuario.findByPk(req.params.id)
-//     .then((usuario)=>{
-//         res.render("modificarUsuario",{usuario:usuario});
-//     })
-//     .catch((err)=>{
-//         console.log("Error ........... "+err);
-//         res.redirect("/");
-//     });
-// });
-
-// ruta.post("/modificarUsuario",(req,res)=>{
-//     Usuario.update(req.body,{where:{id:req.body.id}})
-//     .then(()=>{
-//         res.redirect("/");
-//     })
-//     .catch((err)=>{
-//         console.log("Error ................. "+err);
-//         res.redirect("/");
-//     });
-// });
-
-// ruta.get("/borradoFisico/:id",(req,res)=>{
-//     Usuario.destroy({where:{id:req.params.id}})
-//     .then(()=>{
-//         res.redirect("/");
-//     })
-//     .catch((err)=>{
-//         console.log("Error .............. "+err);
-//         res.redirect("/");
-//     });
-// });
-
-// ruta.get("/borradoLogico/:id",(req,res)=>{
-//     Usuario.update({status:0},{where:{id:req.params.id}})
-//     .then(()=>{
-//         res.redirect("/")
-//     })
-//     .catch((err)=>{
-//         console.log("Error ................. "+err);
-//         res.redirect("/");
-//     });
-// });
-
-//Rutas De Registro donde Guarda el usuario 
-
+//RUTAS REGISTRO
+   //Rutas De Registro donde Guarda el usuario 
 ruta.post("/guardarU",(req,res)=>{
     Usuario.create(req.body)
     .then(()=>{
@@ -122,8 +198,7 @@ ruta.post("/guardarU",(req,res)=>{
         res.redirect("/errorU");
     })
 });
-
-//Rutas De Registro donde Guarda el PROPIETARIO
+   //Rutas De Registro donde Guarda el PROPIETARIO
 ruta.post("/guardarP",(req,res)=>{
     Propietario.create(req.body)
     .then(()=>{
@@ -135,40 +210,26 @@ ruta.post("/guardarP",(req,res)=>{
     })
 });
 
-//Error
+
+//RUTAS ERROR
 //Ruta de Error de Usuario
 ruta.get("/errorU",(req,res)=>{
     res.render("Error/errorU");
 });
-//Ruta de Error de Usuario
+//Ruta de Error de Propietario
 ruta.get("/errorP",(req,res)=>{
     res.render("Error/errorP");
 });
-
-
-//Rutas De USUARIO 
-ruta.get("/principalU",(req,res)=>{
-    if(req.session.usuario){
-        res.render("principalU",{usuario:req.session.usuario});
-    }
-    else{
-        res.redirect("/error");
-    }
-
+//Ruta de Error de Login de Usuario
+ruta.get("/errorloU",(req,res)=>{
+    res.render("Error/errorloU");
+});
+//Ruta de Error de Login de Propietario
+ruta.get("/errorloU",(req,res)=>{
+    res.render("Error/errorloU");
 });
 
-ruta.get("/protegido",(req,res)=>{
-    if(req.session.usuario){
-        res.render("protegido",{usuario:req.session.usuario});
-    }
-    else{
-        res.redirect("/error");
-    }
-});
-
-ruta.get("/error",(req,res)=>{
-    res.render("error");
-});
+//MOSTRAR DATOS
 
 ruta.get("/logout",(req,res)=>{
     req.session.destroy();
@@ -212,6 +273,11 @@ ruta.get("/loginpropi",(req,res)=>{
 //Ruta Login del Usuario
 ruta.get("/loginusuario",(req,res)=>{
     res.render("Login/loginusuario");
+});
+
+//Ruta Login del Administrador
+ruta.get("/loginA",(req,res)=>{
+    res.render("Login/loginA");
 });
 
 

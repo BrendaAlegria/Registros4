@@ -15,9 +15,9 @@
 	padding: 60px 0;
  }
 /*Imagen del centro y color*/
-.header#Inicio{
+.header#Pro{
  	height: 100vh;
- 	background-image:url(../css/general.jpg); 
+ 	background-image:url(../css/propi.jpg); 
  	background-repeat: no-repeat;
  	background-size: cover;
  	background-attachment: fixed;
