@@ -1,23 +1,32 @@
 <%- include("../templates/encabezado2")%>
-<%- include("../templates/menu")%>
+<%- include("../templates/menuCerrarA")%>
 <br>
 <center><h1>Modificar Usuario</h1> </h1></center>
-<form action="/modificarUsuarioo" method="post" id="formulario">
+<form action="/modificarUsuario" method="post" id="formulario">
     <div>
         <input type="hidden" name="id" id="id" value= <%= usuario.id %>>
+        <h3>Nombre:</h3>
         <input type="text" name="nomU" id="nomU" placeholder="Nombre" value=<%= usuario.nomU  %> autofocus> 
         <span mensajeNombre></span>
     </div>
+    <br>
     <div>
+        <h3>Nombre del usuario:</h3>
         <input type="text" name="nomUsu" id="nomUsu" placeholder="Nombre de Usuario" value=<%= usuario.nomUsu %>>
         <span mensajeUsuario></span>
     </div>
+    <br>
     <div>
+        <h3>Contraseña:</h3>
         <input type="text" name="password" id="password" placeholder="Password" value=<%= usuario.password %>>
         <span mensajePassword></span>
     </div>
     <div>
         <button type="submit">Modificar usuario</button>
     </div>
+    <br>
+    <br>
+
+    <a href="/mostrarUsuarios">Regresar</a>
 </form>
 <%- include("../templates/pie")%>

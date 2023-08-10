@@ -1,6 +1,9 @@
 var Sequelize = require("sequelize");
 var usuarioModelo=require("./modelos/rumodelos")
 var propietarioModelo=require("./modelos/guarPropi")
+var casaModelo=require("./modelos/casa")
+var cuartoModelo=require("./modelos/cuarto")
+var departamentoModelo=require("./modelos/departamento")
 require("dotenv").config();
 
 var db=process.env.DB_MYSQL ;
@@ -22,6 +25,12 @@ var conexion=new Sequelize(db,usuario,password,{
 var Usuario=usuarioModelo(conexion);
 //conexion para el propietario 
 var Propietario=propietarioModelo(conexion);
+//conexion para el Casas 
+var Casa=casaModelo(conexion);
+//conexion para el Departementos 
+var Cuarto=cuartoModelo(conexion);
+//conexion para el Departementos 
+var Departamento=departamentoModelo(conexion);
 
 //sale de la aplicacion y se conecta a otro programa
 conexion.sync({force:false})
@@ -40,5 +49,8 @@ conexion.sync({force:false})
 });
 module.exports={
     Usuario:Usuario,
-    Propietario:Propietario
+    Propietario:Propietario,
+    Casa:Casa,
+    Cuarto:Cuarto,
+    Departamento:Departamento
 }

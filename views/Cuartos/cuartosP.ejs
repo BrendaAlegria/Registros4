@@ -1,21 +1,36 @@
-<%- include("../templates/menuP")%>
+<%- include("../templates/menuC")%>
 <%- include("../templates/encabezado2")%>
 
-<h2>Tus casas Disponibles:</h2>
-		<div class="gallery">
-			<div class="image">
-				<a href="DesCasaPropi.html"><img src="/web/Img/AGREGAR.png" alt="Imagen 1" ></a>
-			</div>
-			<div class="image">
-			  <img src="/web/Img/AGREGAR.png" alt="Imagen 2" >
-			</div>
-			<div class="image">
-			  <img src="/web/Img/AGREGAR.png" alt="Imagen 3">
-			</div>
-			<div class="image">
-				<img src="/web/Img/AGREGAR.png" alt="Imagen 3">
-			  </div>
-        <div class="navbar">
+<h1>Nuevo  Cuarto </h1>
+<form action="/nuevoCuarto" method="post" id="formulario">
+    <div>
+        <input type="text" name="nomC" id="nomC" placeholder="Nombre" autofocus>
+        <span mensajeNombre></span>
+    </div>
+    <div>
+		<input type="tel" id="telC" name="telC" placeholder="4274568975" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+        <span mensajeUsuario></span>
+    </div>
+    <div>
+        <input type="text" name="direccionC" id="direccionC" placeholder="direccion" autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <input type="text" name="costoC" id="costoC" placeholder="Precio de Renta" autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <input type="text" name="tiempoC" id="tiempoC" placeholder="Tiempo de Renta" autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <input type="text" name="desC" id="desC" placeholder="Descripcion" autofocus>
+        <span mensajePassword></span>
+    </div>
+    <div>
+        <button type="submit">Guardar Registro De Cuarto</button>
+    </div>
+</form>
 			
           <nav class="menu">
             <h2><FONT FACE="courier new"><a href="/principalP"> R e g r e s a r</a></FONT></h2>

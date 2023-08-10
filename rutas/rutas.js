@@ -2,6 +2,10 @@ const { render } = require("ejs");
 var ruta=require("express").Router();
 var {Usuario} = require("../conexion");
 var {Propietario} = require("../conexion");
+var {Casa} = require("../conexion");
+var {Cuarto} = require("../conexion");
+var {Departamento} = require("../conexion");
+
 
 
 //RUTAS ADMIN
@@ -20,18 +24,6 @@ ruta.post("/validarA",(req,res)=>{
 ruta.get("/mostrar",(req,res)=>{
     res.render("Admin/mostrar");
 });
-    //Ruta si no te deja entrar a mostrar usuarios
-/*ruta.get("/mostrarUsuarios",(req,res)=>{
-    res.render("error");
-});*/
-  //Ruta mostrar Propietarios
-// ruta.get("/mostrarPro",(req,res)=>{
-//     res.render("Admin/mostrarPro");
-// });
-    //Ruta si no te deja entrar a mostrar Propietarios
-// ruta.get("/mostrarPro",(req,res)=>{
-//     res.render("error");
-// });
 
 
 
@@ -68,6 +60,8 @@ ruta.get("/mostrarPro",(req,res)=>{
         res.render("error");
     });
 });
+
+
 //BORRAR 
 ruta.get("/borradoFisico/:id",(req,res)=>{//lo borra completamnete
     Usuario.destroy({where:{id:req.params.id}})
@@ -89,30 +83,57 @@ ruta.get("/borradoFisicoP/:id",(req,res)=>{//lo borra completamnete
         res.redirect("error");
     });
 });
+
+
 //EDITAR
 ruta.get("/editarUsuario/:id",(req, res)=>{
     Usuario.findByPk(req.params.id)
-    .then((U)=>{
-        res.render("Admin/modificarUsuario",{usua:U});
+    .then((usuario)=>{
+        console.log("Entro en then editar");
+        res.render("Admin/modificarUsuario",{usuario:usuario});
     })
     .catch((err)=>{
-        console.log("Error ........... "+err);
+        console.log("Error en editar ........... "+err);
+        res.redirect("error");
+    });
+});
+    //propietario
+ruta.get("/editarPro/:id",(req, res)=>{
+    Propietario.findByPk(req.params.id)
+    .then((propietario)=>{
+        console.log("Entro en then editar propietario");
+        res.render("Admin/modificarPro",{propietario:propietario});
+    })
+    .catch((err)=>{
+        console.log("Error en editar propietario ........... "+err);
         res.redirect("error");
     });
 });
 
 //MODIFICAR USUARIO 
-ruta.post("/modificarUsuarioo",(req,res)=>{
+ruta.post("/modificarUsuario",(req,res)=>{
     Usuario.update(req.body,{where:{id:req.body.id}})
     .then(()=>{
-        res.redirect("/mostrarUsuarios");
+        console.log("Entro en then modificar");
+        res.redirect("mostrarUsuarios");
     })
     .catch((err)=>{
-        console.log("Error ................. "+err);
+        console.log("Error en mostrar................. "+err);
         res.redirect("error");
     });
 });
-
+//propietario
+ruta.post("/modificarPro",(req,res)=>{
+    Propietario.update(req.body,{where:{id:req.body.id}})
+    .then(()=>{
+        console.log("Entro en then modificar");
+        res.redirect("mostrarPro");
+    })
+    .catch((err)=>{
+        console.log("Error en mostrar................. "+err);
+        res.redirect("error");
+    });
+});
 //CERRAR SESION 
   //Usuario
 ruta.get("/logoutU",(req,res)=>{
@@ -166,7 +187,7 @@ ruta.post("/validarP", (req, res) => {
                 res.redirect("/principalP");
             } else {
                console.log("then else");
-                res.redirect("/loginusuario");
+                res.redirect("/loginpropi");
             }
         })
         .catch((err) => {
@@ -209,6 +230,248 @@ ruta.post("/guardarP",(req,res)=>{
         res.redirect("/errorP");
     })
 });
+
+//RUTAS REGISTRO SERVICIOS
+   //Rutas De Registro donde Guarda Casas
+   ruta.post("/nuevaCasa",(req,res)=>{
+    Casa.create(req.body)
+    .then(()=>{
+        res.redirect("desCasaP");
+    })
+    .catch((err)=>{
+        console.log("Error al registrar el usuario......."+err);
+        res.redirect("/error");
+    })
+});
+    //muestra las casas
+ruta.get("/desCasaP",(req,res)=>{
+    //console.log("entra a mostrarPropietarios..................................")
+    Casa.findAll()
+    .then((c)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Casas/desCasaP",{Casas:c});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+ruta.get("/desCasaU",(req,res)=>{
+    //console.log("entra a mostrarPropietarios..................................")
+    Casa.findAll()
+    .then((c)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Casas/desCasaU",{Casas:c});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+    //borra las casas
+ruta.get("/borradoCa/:id",(req,res)=>{//lo borra completamnete
+    Casa.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/desCasaP");
+    })
+    .catch((err)=>{
+        console.log("Error .............. "+err);
+        res.redirect("error");
+    });
+});
+    //edita las casas
+ruta.get("/editarCa/:id",(req, res)=>{
+    Casa.findByPk(req.params.id)
+    .then((casa)=>{
+        console.log("Entro en then editar CASA");
+        res.render("Casas/casasMP",{casa:casa});
+    })
+    .catch((err)=>{
+        console.log("Error en editar propietario ........... "+err);
+        res.redirect("error");
+    });
+});
+//modifica casas
+ruta.post("/casasMP",(req,res)=>{
+    Casa.update(req.body,{where:{id:req.body.id}})
+    .then(()=>{
+        console.log("Entro en then modificar");
+        res.redirect("desCasaP");
+    })
+    .catch((err)=>{
+        console.log("Error en mostrar................. "+err);
+        res.redirect("error");
+    });
+});
+
+//CUARTOS
+//Rutas De Registro donde Guarda Cuartos
+ruta.post("/nuevoCuarto",(req,res)=>{
+    Cuarto.create(req.body)
+    .then(()=>{
+        res.redirect("desCuartoP");
+    })
+    .catch((err)=>{
+        console.log("Error al registrar el cuarto......."+err);
+        res.redirect("/error");
+    })
+});
+    //muestra las Cuartos
+ruta.get("/desCuartoP",(req,res)=>{
+    //console.log("entra a mostrarPropietarios..................................")
+    Cuarto.findAll()
+    .then((cu)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Cuartos/desCuartoP",{Cuartos:cu});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+//muestra cuarto en usuario
+ruta.get("/desCuartoU",(req,res)=>{
+    //console.log("entra a mostrarPropietarios..................................")
+    Cuarto.findAll()
+    .then((cua)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Casas/desCuartoU",{Cuartos:cua});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+    //borra las cuarto
+ruta.get("/borradoCu/:id",(req,res)=>{//lo borra completamnete
+    Cuarto.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/desCuartoP");
+    })
+    .catch((err)=>{
+        console.log("Error .............. "+err);
+        res.redirect("error");
+    });
+});
+    //edita los cuartos
+ruta.get("/editarCu/:id",(req, res)=>{
+    Cuarto.findByPk(req.params.id)
+    .then((cuarto)=>{
+        console.log("Entro en then editar Cuarto");
+        res.render("Cuartos/cuartosMP",{cuarto:cuarto});
+    })
+    .catch((err)=>{
+        console.log("Error en editar cuarto ........... "+err);
+        res.redirect("error");
+    });
+});
+//MODIFICAR cuartos
+ruta.post("/cuartosMP",(req,res)=>{
+    Cuarto.update(req.body,{where:{id:req.body.id}})
+    .then(()=>{
+        console.log("Entro en then modificar");
+        res.redirect("desCasaP");
+    })
+    .catch((err)=>{
+        console.log("Error en mostrar................. "+err);
+        res.redirect("error");
+    });
+});
+
+
+//DEPARTAMENTOS
+//Rutas De Registro donde Guarda Departamentos
+ruta.post("/nuevoDepa",(req,res)=>{
+    Departamento.create(req.body)
+    .then(()=>{
+        res.redirect("desDepartP");
+    })
+    .catch((err)=>{
+        console.log("Error al registrar el depa......."+err);
+        res.redirect("/error");
+    })
+});
+    //muestra los Departamentos
+ruta.get("/desDepartP",(req,res)=>{
+    //console.log("entra a mostrarDepartamentos..................................")
+    Departamento.findAll()
+    .then((d)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Departamentos/desdepartP",{Departamentos:d});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+//muestra Departamentos en usuario
+ruta.get("/desDepartU",(req,res)=>{
+    //console.log("entra a mostrarDepartamentos..................................")
+    Departamento.findAll()
+    .then((d)=>{
+        //console.log("then");
+        //console.log(s);
+        //res.end();
+        res.render("Departamentos/desDepartU",{Departamentos:d});
+    })
+    .catch((err)=>{
+        console.log("Error .................."+err)
+        //res.end();
+        res.render("error");
+    });
+});
+    //borra los Departamentos
+ruta.get("/borraDe/:id",(req,res)=>{//lo borra completamnete
+    Departamento.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/desDepartP");
+    })
+    .catch((err)=>{
+        console.log("Error .............. "+err);
+        res.redirect("error");
+    });
+});
+    //edita los Departamentos
+ruta.get("/editarDe/:id",(req, res)=>{
+    Departamento.findByPk(req.params.id)
+    .then((departamento)=>{
+        console.log("Entro en then editar DEPA");
+        res.render("Departamentos/departMP",{departamento:departamento});
+    })
+    .catch((err)=>{
+        console.log("Error en editar cuarto ........... "+err);
+        res.redirect("error");
+    });
+});
+//MODIFICAR cuartos
+ruta.post("/departMP",(req,res)=>{
+    Departamento.update(req.body,{where:{id:req.body.id}})
+    .then(()=>{
+        console.log("Entro en then modificar");
+        res.redirect("desDepartP");
+    })
+    .catch((err)=>{
+        console.log("Error en mostrar................. "+err);
+        res.redirect("error");
+    });
+});
+
+
 
 
 //RUTAS ERROR

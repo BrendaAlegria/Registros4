@@ -1,0 +1,32 @@
+<%- include("../templates/encabezado2")%>
+<%- include("../templates/menuCerrarA")%>
+<br>
+<center><h1>Modificar Propietario</h1> </h1></center>
+<form action="/modificarPro" method="post" id="formulario">
+    <div>
+        <input type="hidden" name="id" id="id" value= <%= propietario.id %>>
+        <h3>Nombre:</h3>
+        <input type="text" name="nomP" id="nomP" placeholder="Nombre" value=<%= propietario.nomP  %> autofocus> 
+        <span mensajeNombre></span>
+    </div>
+    <br>
+    <div>
+        <h3>Nombre de usuario del Propietario:</h3>
+        <input type="text" name="nomPro" id="nomPro" placeholder="Usuario del Propietario" value=<%= propietario.nomPro %>>
+        <span mensajeUsuario></span>
+    </div>
+    <br>
+    <div>
+        <h3>Contraseña:</h3>
+        <input type="text" name="password" id="password" placeholder="Password" value=<%= propietario.password %>>
+        <span mensajePassword></span>
+    </div>
+    <div>
+        <button type="submit">Modificar Propietario</button>
+    </div>
+    <br>
+    <br>
+
+    <a href="/mostrarPro">Regresar</a>
+</form>
+<%- include("../templates/pie")%>

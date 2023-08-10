@@ -1,23 +1,41 @@
-<%- include("../templates/menuCerrar")%>
+<%- include("../templates/menuC")%>
 <%- include("../templates/encabezado2")%>
-<h2>Casa Disponible</h2>
-		<div class="gallery">
-			<div class="image">
-                <img src="/web/Img/AGREGAR.png" alt="Imagen 1" ></a>
-			</div>
-            <div class="image">
-                <h3>Agregar Descripcion:</h3>
-                <p>_______________________________</p>
-                
-                
-				<h3>Tu contacto:</h3>
-                <p><a href="/datos">Agregar tus datos personales</a></p>
-				
-				
-			</div>
+<br>
+<center><h1>Mostrar Casas </h1></center>
+<center>
+    <table style="width:100%">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Costo</th>
+                <th>Tiempo</th>
+                <th>Descripcion</th>
+            </tr>
+            <%
+            Casas.forEach((casa)=>{
+            %>
+            <tr>
+                <td><%= casa.id %></td>
+                <td><%= casa.nomPropi %></td>
+                <td><%= casa.tel %></td>
+                <td><%= casa.direccion %></td>
+                <td><%= casa.costo %></td>
+                <td><%= casa.tiempo %></td>
+				<td><%= casa.desca %></td>
+                <td>
+                    <a href="/editarCa/<%= casa.id %>" target="_blank">Editar</a> / <a href="/borradoCa/<%= casa.id %>"target="_blank">Borrar</a>
+                </td>
+            </tr>
+            <%
+            });
+            %>
+    </table>
 
 			<nav class="menu">
-				<h2><FONT FACE="courier new"><a href="/casasP"></a> R e g r e s a r</a></FONT></h2>
+				<h2><FONT FACE="courier new"><a href="/casasP">R e g r e s a r</a> </FONT></h2>
 			</nav>
 		</div>
 

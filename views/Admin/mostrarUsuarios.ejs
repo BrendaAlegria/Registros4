@@ -1,10 +1,9 @@
 <%- include("../templates/encabezado2")%>
-<%- include("../templates/menuCerrar")%>
+<%- include("../templates/menuCerrarA")%>
 <br>
 <center><h1>Mostrar Usuarios</h1></center>
 <center>
-    <table>
-        <thead>
+    <table style="width:100%">
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -14,8 +13,6 @@
                 <th>Telefono</th>
                 <th>Editar / Borrado físico</th>
             </tr>
-        </thead>
-        <tbody>
             <%
             Usuarios.forEach((usuario)=>{
             %>
@@ -27,14 +24,12 @@
                 <td><%= usuario.password %></td>
                 <td><%= usuario.tel %></td>
                 <td>
-                    <a href="/editarUsuario/<%= usuario.id %>">Editar</a> / <a href="/borradoFisico/<%= usuario.id %>">Borrado físico</a>
+                    <a href="/editarUsuario/<%= usuario.id %>"><FONT FACE="courier new"><a href="/principal"> Editar </a></a> / <a href="/borradoFisico/<%= usuario.id %>"><FONT FACE="courier new"><a href="/principal"> Borrado Fisico </a></a>
                 </td>
             </tr>
             <%
             });
             %>
-            
-        </tbody>
     </table>
 
 </center>

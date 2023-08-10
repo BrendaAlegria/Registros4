@@ -1,28 +1,39 @@
-<%- include("../templates/menuCerrar")%>
+<%- include("../templates/menuC")%>
 <%- include("../templates/encabezado2")%>
-<h2>Cuartos Disponible</h2>
-		<div class="gallery">
-			<div class="image">
-                <img src="/web/Img/Ca7.jpeg" alt="Imagen 1" ></a>
-			</div>
-            <div class="image">
-                <h3>Este Cuarto cuenta con lo siguiente :</h3>
-                <p>-Cama</p>
-                <p>-Internet</p>
-                <p>-Horno de Microondras</p>
-                <p>-Escritorio</p>
-                <p>-Seguridad</p>
-                <p>-Cerca de la Universidad</p>
-                <h3>Precio:</h3>
-                <p>$15000</p>
-                <h3>Tiempo de Renta por el Precio</h3>
-                <p>4 mes Completo</p>
-                <h3>Contacto del Propietario</h3>
-                <p>458752172</p>
-				<p>propietario@gmail.com</p>
-			</div>
-			
-		  </div>
+<h2>Cuartos Disponibles</h2>
+<br>
+<center>
+    <table style="width:100%">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Costo</th>
+                <th>Tiempo</th>
+                <th>Descripcion</th>
+            </tr>
+            <%
+            Cuartos.forEach((cuarto)=>{
+            %>
+            <tr>
+                <td><%= cuarto.id %></td>
+                <td><%= cuarto.nomC %></td>
+                <td><%= cuarto.telC %></td>
+                <td><%= cuarto.direccionC %></td>
+                <td><%= cuarto.costoC %></td>
+                <td><%= cuarto.tiempoC %></td>
+				<td><%= cuarto.descaC %></td>
+                <td> 
+                </td>
+            </tr>
+            <%
+            });
+            %>
+    </table>
+<br>
+<br>
+<br>
           <div class="navbar">
 			
 			<nav class="menu">

@@ -1,0 +1,41 @@
+<%- include("../templates/menuC")%>
+<%- include("../templates/encabezado2")%>
+<h1>Actualizar Casa</h1>
+<form action="/casasMP" method="post" id="formulario">
+    <div>
+        <input type="hidden" name="id" id="id" value= <%= casa.id %>>
+        <h3>Nombre:</h3>
+        <input type="text" name="nomPropi" id="nomPropi" placeholder="Nombre" value=<%= casa.nomPropi  %> autofocus>
+        <span mensajeNombre></span>
+    </div>
+    <div>
+        <h3>Telefono::</h3>
+		<input type="tel" id="tel" name="tel" placeholder="4274568975" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" value=<%= casa.tel %>required>
+        <span mensajeUsuario></span>
+    </div>
+    <div>
+        <h3>Direccion:</h3>
+        <input type="text" name="direccion" id="direccion" placeholder="direccion" value=<%= casa.direccion %>autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <h3>Precio de renta:</h3>
+        <input type="text" name="costo" id="costo" placeholder="Precio de Renta" value=<%= casa.costo %> autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <h3>Tiempo de renta:</h3>
+        <input type="text" name="tiempo" id="tiempo" placeholder="Tiempo de Renta" value=<%= casa.tiempo %>autofocus>
+        <span mensajePassword></span>
+    </div>
+	<div>
+        <h3>Descripcion de Casa:</h3>
+        <input type="text" name="desca" id="desca" placeholder="Descripcion" value=<%= casa.desca %>autofocus>
+        <span mensajePassword></span>
+    </div>
+    <div>
+        <button type="submit">Guardar Modificacion  De Casa</button>
+    </div>
+</form>
+<%- include("../templates/pie")%>
+     

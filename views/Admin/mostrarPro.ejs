@@ -1,10 +1,9 @@
 <%- include("../templates/encabezado2")%>
-<%- include("../templates/menuCerrar")%>
+<%- include("../templates/menuCerrarA")%>
 <br>
 <center><h1>Mostrar Propietarios</h1></center>
 <center>
-    <table>
-        <thead>
+    <table style=" width:100%">
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -14,27 +13,24 @@
                 <th>Telefono</th>
                 <th>Editar / Borrado físico</th>
             </tr>
-        </thead>
-        <tbody>
             <%
             Propietarios.forEach((propietario)=>{
             %>
             <tr>
                 <td><%= propietario.id %></td>
-                <td><%= propietario.nomU %></td>
-                <td><%= propietario.nomUsu %></td>
+                <td><%= propietario.nomP %></td>
+                <td><%= propietario.nomPro %></td>
                 <td><%= propietario.email %></td>
                 <td><%= propietario.password %></td>
                 <td><%= propietario.tel %></td>
                 <td>
-                    <a href="/editarPro/<%= propietario.id %>">Editar</a> / <a href="/borradoFisicoP/<%= propietario.id %>">Borrado físico</a>
+                    <a href="/editarPro/<%= propietario.id %>" target="_blank">Editar</a> / <a href="/borradoFisicoP/<%= propietario.id %>"target="_blank">Borrar</a>
                 </td>
             </tr>
             <%
             });
             %>
             
-        </tbody>
     </table>
 
 </center>
